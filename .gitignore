@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+application-local.properties
+*.pem
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Backend
+target/
+
+# Frontend
+node_modules/
+.angular/
+dist/
+
+# Divers
+*.log

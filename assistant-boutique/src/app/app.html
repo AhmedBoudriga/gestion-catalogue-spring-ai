@@ -1,0 +1,38 @@
+<div class="page">
+  <div class="card">
+
+    <div class="header">🤖 Assistant Boutique IA</div>
+
+    <div class="messages" #zone>
+      @for (m of messages(); track $index) {
+        <div class="msg" [class.user]="m.role === 'user'" [class.bot]="m.role === 'bot'">
+          @if (m.html) {
+            <div [innerHTML]="m.html"></div>
+          } @else {
+            {{ m.text }}
+          }
+        </div>
+      }
+      @if (loading()) {
+        <div class="msg bot">
+          <span class="spinner"></span> L'agent réfléchit... {{ seconds() }} s
+        </div>
+      }
+    </div>
+
+    <div class="footer">
+      <div class="chips">
+        <button type="button" [disabled]="loading()" (click)="ask('Quels sont vos produits ?')">Tous les produits</button>
+        <button type="button" [disabled]="loading()" (click)="ask('Quel est le prix moyen de vos articles et quel est votre produit le plus cher ?')">Statistiques</button>
+        <button type="button" class="green" [disabled]="loading()" (click)="fill('Ajoute un produit Webcam 4K Pro à 280 dinars avec un stock de 15 unités et la description Webcam ultra HD')">Ajouter un produit</button>
+        <button type="button" class="red" [disabled]="loading()" (click)="ask('Quelle est la capitale du Bresil ?')">Anti-hallucination</button>
+      </div>
+
+      <form class="row" (ngSubmit)="ask(input)">
+        <input name="input" [(ngModel)]="input" placeholder="Votre question..." autocomplete="off" [disabled]="loading()">
+        <button type="submit" class="send" [disabled]="loading()">Envoyer</button>
+      </form>
+    </div>
+
+  </div>
+</div>
